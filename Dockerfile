@@ -12,9 +12,6 @@ FROM python:${PYTHON_VERSION}-slim as base
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# Do not create Poetry virtual environment.
-ENV POETRY_VIRTUALENVS_CREATE=false
-
 # Keeps Python from buffering stdout and stderr to avoid situations where
 # the application crashes without emitting any logs due to buffering.
 ENV PYTHONUNBUFFERED=1
@@ -34,11 +31,11 @@ RUN adduser \
     appuser
 
 # Copy only dependency files first to leverage Docker caching.
-COPY pyproject.toml poetry.lock ./ 
+COPY pyproject.toml uv.lock ./ 
 
 # Download dependencies.
-RUN pip install poetry
-RUN poetry install
+RUN pip install uv
+RUN uv sync
 
 # Switch to the non-privileged user to run the application.
 USER appuser
@@ -50,4 +47,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the application.
-CMD poetry run python manage.py runserver 0.0.0.0:8000
+CMD uv run manage.py runserver 0.0.0.0:8000

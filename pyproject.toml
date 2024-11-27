@@ -1,17 +1,13 @@
-[tool.poetry]
-package-mode = false
+[project]
+name = "django-practice"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["django==5.1.3", "ruff==0.8.0", "pyright==1.1.389"]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-django = "^5.1.3"
-
-[tool.poetry.dev-dependencies]
-ruff = "^0.8.0"
-pyright = "^1.1.389"
+[tool.uv]
+no-cache = true # Docker doesn't allow modifying the home directory.
 
 [tool.pyright]
 typeCheckingMode = "strict"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
