@@ -17,4 +17,3 @@ no-cache = true # Docker doesn't allow modifying the home directory.
 
 [tool.pyright]
 typeCheckingMode = "strict"
-reportMissingTypeStubs = false

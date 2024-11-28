@@ -23,4 +23,4 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
 ]
-urlpatterns += debug_toolbar_urls()
+urlpatterns.extend(debug_toolbar_urls())
