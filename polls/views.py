@@ -34,7 +34,7 @@ class ResultsView(generic.DetailView):
 class VoteView(View):
     def post(self, request: HttpRequest, question_id: int) -> HttpResponse:
         question = get_object_or_404(Question, pk=question_id)
-        choice_set: QuerySet[Choice] = getattr(question, "choice_set")
+        choice_set: QuerySet[Choice] = question.choice_set
         try:
             selected_choice = choice_set.get(pk=request.POST["choice"])
         except (KeyError, Choice.DoesNotExist):
